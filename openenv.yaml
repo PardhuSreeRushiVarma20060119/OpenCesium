@@ -1,0 +1,45 @@
+id: opencesium-v1
+name: OpenCesium
+version: "1.0.0"
+description: >
+  Meta-agent workflow automation environment. An outer LLM agent
+  constructs and configures tool-using sub-agents to solve structured
+  business workflows involving financial data, computation, and delivery.
+author: Pardhu
+tags: [openenv, meta-agent, workflow-automation, finance, tool-use]
+
+observation_space:
+  type: object
+  fields:
+    task_id: str
+    task_description: str
+    available_tools: list[str]
+    agent_config: dict
+    last_score: float
+    last_reward: float
+    step_index: int
+    max_steps: int
+    history: list
+    tool_execution_log: list[str]
+    error_log: list[str]
+    done: bool
+
+action_space:
+  type: object
+  enum: [ADD_TOOL, REMOVE_TOOL, SET_PROMPT, SET_STRATEGY, EVALUATE, NOOP]
+  payload: dict  # tool, prompt, strategy, params
+
+tasks:
+  - {id: task_easy_stock_alert, difficulty: easy, max_steps: 10}
+  - {id: task_medium_gdp_growth, difficulty: medium, max_steps: 15}
+  - {id: task_hard_structured_report, difficulty: hard, max_steps: 20}
+
+reward:
+  type: dense
+  range: [-0.5, 2.0]
+  partial_progress: true
+
+runtime:
+  python: "3.11"
+  memory_gb: 8
+  vcpu: 2
