@@ -1,6 +1,6 @@
 # OpenCesium
 
-**A Meta-Agent Workflow Automation Environment for Real-World Tool-Using Agent Workflow Automations**
+**A Meta-Agent Workflow Automation Environment for Real-World Tool-Using Agent Automations**
 
 OpenCesium is an OpenEnv-compliant benchmark environment in which a meta-agent learns to construct, parameterize, and iteratively refine executable tool-using sub-agents to complete structured business workflow tasks.
 
