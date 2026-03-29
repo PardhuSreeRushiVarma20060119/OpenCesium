@@ -5,7 +5,11 @@ import time
 
 from tools.base import BaseTool, ToolResult
 
-# Safe names available inside eval expressions
+# Safe names available inside eval expressions.
+# Builtins are completely suppressed (__builtins__={}) so that only the
+# explicitly whitelisted math functions and a handful of Python builtins
+# can be referenced. This prevents access to file I/O, imports, or any
+# other dangerous operations. The empty locals dict further restricts scope.
 _SAFE_GLOBALS: dict = {
     "__builtins__": {},
     "abs": abs,

@@ -5,7 +5,6 @@ the tool falls back to a small reference-price dataset so that graders remain
 functional during CI and offline evaluation.
 """
 
-import os
 import time
 from typing import Any
 
@@ -66,7 +65,6 @@ class StockTool(BaseTool):
         include_history: bool = bool(params.get("include_history", False))
         history_days: int = int(params.get("history_days", 7))
         compute_sma: bool = bool(params.get("compute_sma", False))
-        env_mode = os.environ.get("ENV_MODE", "development").lower()
 
         # Try live fetch first; fall back to reference data on any failure
         live_result = self._fetch_live(ticker, include_history, history_days, compute_sma, t0)
